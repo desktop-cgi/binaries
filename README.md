@@ -1,5 +1,5 @@
 # DesktopCGI Tooling
-#### binaries folder for DesktopCGI Tooling
+#### `binaries` folder for DesktopCGI Tooling
 
 --------------------------------------------
 
