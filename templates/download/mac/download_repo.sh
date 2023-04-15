@@ -5,6 +5,25 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
+# If neither curl nor wget is installed, install curl and download the file using curl
+if command -v apt-get >/dev/null 2>&1; then
+    # If apt-get is available, install curl using apt-get
+    sudo apt-get update && sudo apt-get install -y curl
+elif command -v yum >/dev/null 2>&1; then
+    # If yum is available, install curl using yum
+    sudo yum update && sudo yum install -y curl
+elif command -v pacman > /dev/null; then
+    # If pacman is available, install curl using pacman
+    sudo pacman -S --noconfirm curl
+elif command -v brew > /dev/null; then
+    # If brew is available, install curl using brew
+    brew install curl
+else
+    # If neither apt-get nor yum is available, print an error message and exit with status 1
+    echo "Error: cannot install curl (neither apt-get nor yum is available)"
+    exit 1
+fi
+
 # Check if jq is installed, and if not, try to install it
 if ! command -v jq > /dev/null; then
     if command -v apt-get > /dev/null; then
